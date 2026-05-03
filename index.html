@@ -1,132 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmed Raza | Data Analyst</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-    header { background-color: #0d1117; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
-    .container { padding: 20px; max-width: 900px; margin: auto; background-color: white; }
-    .section { margin-bottom: 40px; }
-    .section h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; }
-    .skills img { height: 40px; margin-right: 10px; vertical-align: middle; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ahmed Raza — Data Analytics & AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:     #080A0F;
+  --bg2:    #0D1117;
+  --bg3:    #111822;
+  --panel:  #131B27;
+  --border: #1E2D42;
+  --border2:#253548;
+  --green:  #00D68F;
+  --green2: #00A86B;
+  --amber:  #FFB700;
+  --blue:   #3B82F6;
+  --red:    #F87171;
+  --text:   #E2E8F0;
+  --muted:  #64748B;
+  --muted2: #94A3B8;
+  --mono:   'IBM Plex Mono', monospace;
+  --sans:   'Syne', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--mono);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ── SCANLINE OVERLAY ──────────────────────── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events:none;
+  z-index:999;
+}
+
+/* ── NAV ───────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2.5rem;
+  background:rgba(8,10,15,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:1rem;
+  color:var(--text);
+  text-decoration:none;
+  letter-spacing:-0.02em;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.nav-logo::before{
+  content:'';
+  width:8px;height:8px;
+  background:var(--green);
+  border-radius:50%;
+  animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  font-size:0.72rem;font-weight:500;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--muted2);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--green);}
+
+/* ── TICKER TAPE ───────────────────────────── */
+.ticker{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+  padding:0.5rem 0;
+  white-space:nowrap;
+  position:relative;
+}
+.ticker-inner{
+  display:inline-block;
+  animation:ticker 30s linear infinite;
+}
+.ticker-item{
+  display:inline-block;
+  font-size:0.7rem;
+  color:var(--muted2);
+  padding:0 2rem;
+}
+.ticker-item .up{color:var(--green);}
+.ticker-item .dn{color:var(--red);}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── HERO ──────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  padding-top:60px;
+}
+.hero-ticker{ grid-row:1; }
+.hero-main{
+  grid-row:2;
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  align-items:center;
+}
+.vline{background:var(--border);align-self:stretch;}
+.hero-left{
+  padding:5rem 4rem 5rem 2.5rem;
+  position:relative;
+}
+.terminal-prompt{
+  font-size:0.72rem;
+  color:var(--green);
+  letter-spacing:0.05em;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.terminal-prompt::before{content:'›';font-size:1rem;}
+.hero-title{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(3rem,5vw,5.5rem);
+  line-height:0.95;
+  letter-spacing:-0.04em;
+  color:var(--text);
+  margin-bottom:0.5rem;
+}
+.hero-title .accent{
+  color:transparent;
+  -webkit-text-stroke:1px var(--green);
+}
+.hero-sub{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:clamp(1rem,2vw,1.3rem);
+  color:var(--muted2);
+  letter-spacing:-0.02em;
+  margin-bottom:2rem;
+}
+.hero-desc{
+  font-size:0.82rem;
+  color:var(--muted2);
+  max-width:420px;
+  line-height:1.9;
+  margin-bottom:2.5rem;
+}
+.hero-cta{display:flex;gap:0.75rem;flex-wrap:wrap;}
+.btn{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:0.7rem 1.5rem;
+  text-decoration:none;
+  transition:all 0.2s;
+}
+.btn-primary{
+  background:var(--green);
+  color:var(--bg);
+  border:1px solid var(--green);
+}
+.btn-primary:hover{background:var(--green2);border-color:var(--green2);}
+.btn-ghost{
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border2);
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);}
+
+.hero-right{
+  padding:5rem 2.5rem 5rem 4rem;
+  display:flex;flex-direction:column;gap:2rem;
+}
+.stat-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.stat{
+  background:var(--bg2);
+  padding:1.5rem;
+}
+.stat-val{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:2.4rem;
+  letter-spacing:-0.04em;
+  color:var(--text);
+  line-height:1;
+}
+.stat-val .unit{font-size:1.2rem;color:var(--green);}
+.stat-lbl{
+  font-size:0.68rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  margin-top:0.4rem;
+}
+.domain-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.dtag{
+  font-size:0.68rem;
+  padding:0.35rem 0.8rem;
+  border:1px solid var(--border2);
+  color:var(--muted2);
+  letter-spacing:0.05em;
+}
+.dtag.hot{border-color:var(--green);color:var(--green);}
+.dtag.warm{border-color:var(--amber);color:var(--amber);}
+
+/* ── SECTION BASE ──────────────────────────── */
+section{padding:5rem 2.5rem;border-top:1px solid var(--border);}
+.sec-label{
+  font-size:0.65rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--green);
+  margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.sec-label::before{content:'//';color:var(--muted);}
+.sec-title{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(2rem,4vw,3.5rem);
+  letter-spacing:-0.04em;
+  line-height:1;
+  color:var(--text);
+  margin-bottom:3rem;
+}
+
+/* ── AI SECTION ────────────────────────────── */
+.ai-section{background:var(--bg);}
+.ai-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  margin-bottom:3rem;
+}
+.ai-card{
+  background:var(--bg2);
+  padding:2rem;
+  transition:background 0.2s;
+}
+.ai-card:hover{background:var(--panel);}
+.ai-card-icon{
+  font-size:1.5rem;
+  margin-bottom:1rem;
+}
+.ai-card-title{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:1rem;
+  color:var(--text);
+  margin-bottom:0.75rem;
+  letter-spacing:-0.02em;
+}
+.ai-card-desc{
+  font-size:0.78rem;
+  color:var(--muted2);
+  line-height:1.8;
+}
+.ai-card-tag{
+  display:inline-block;
+  margin-top:1rem;
+  font-size:0.65rem;
+  padding:0.25rem 0.6rem;
+  background:rgba(0,214,143,0.08);
+  color:var(--green);
+  border:1px solid rgba(0,214,143,0.2);
+  letter-spacing:0.05em;
+}
+
+/* ── PROJECTS ──────────────────────────────── */
+.projects-section{background:var(--bg2);}
+.proj-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.proj-card{
+  background:var(--bg);
+  padding:2rem;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  gap:0.75rem;
+  transition:background 0.15s;
+  position:relative;
+  overflow:hidden;
+}
+.proj-card::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:3px;height:100%;
+  background:var(--border2);
+  transition:background 0.15s;
+}
+.proj-card:hover{background:var(--panel);}
+.proj-card:hover::after{background:var(--green);}
+.proj-card.featured::after{background:var(--green);}
+.proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.proj-icon{font-size:1.25rem;flex-shrink:0;}
+.proj-badge{
+  font-size:0.6rem;
+  padding:0.2rem 0.5rem;
+  background:rgba(0,214,143,0.1);
+  color:var(--green);
+  border:1px solid rgba(0,214,143,0.25);
+  letter-spacing:0.06em;
+  flex-shrink:0;
+}
+.proj-name{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:1.05rem;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  line-height:1.2;
+}
+.proj-desc{
+  font-size:0.75rem;
+  color:var(--muted2);
+  line-height:1.8;
+  flex:1;
+}
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.35rem;padding-top:0.75rem;border-top:1px solid var(--border);}
+.proj-stack span{
+  font-size:0.62rem;
+  padding:0.2rem 0.5rem;
+  background:var(--bg2);
+  color:var(--muted2);
+  border:1px solid var(--border);
+  letter-spacing:0.03em;
+}
+.proj-arrow{
+  font-size:0.8rem;
+  color:var(--green);
+  align-self:flex-end;
+  opacity:0;
+  transition:opacity 0.15s;
+}
+.proj-card:hover .proj-arrow{opacity:1;}
+
+/* ── EXPERIENCE ────────────────────────────── */
+.exp-section{background:var(--bg);}
+.exp-list{display:flex;flex-direction:column;gap:0;}
+.exp-item{
+  display:grid;
+  grid-template-columns:200px 1px 1fr;
+  gap:0 2rem;
+  border-top:1px solid var(--border);
+  padding:2rem 0;
+}
+.exp-item:last-child{border-bottom:1px solid var(--border);}
+.exp-meta{}
+.exp-co{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:0.95rem;
+  color:var(--text);
+  margin-bottom:0.25rem;
+  letter-spacing:-0.01em;
+}
+.exp-period{
+  font-size:0.68rem;
+  color:var(--muted);
+  letter-spacing:0.04em;
+}
+.exp-domain{
+  font-size:0.65rem;
+  margin-top:0.5rem;
+  padding:0.2rem 0.5rem;
+  border:1px solid var(--border2);
+  color:var(--amber);
+  display:inline-block;
+  letter-spacing:0.05em;
+}
+.exp-vline{background:var(--border);align-self:stretch;}
+.exp-body{}
+.exp-role{
+  font-size:0.75rem;
+  color:var(--muted2);
+  margin-bottom:1rem;
+  letter-spacing:0.02em;
+}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:0.5rem;}
+.exp-points li{
+  font-size:0.75rem;
+  color:var(--muted2);
+  line-height:1.7;
+  display:flex;gap:0.75rem;
+}
+.exp-points li::before{
+  content:'→';
+  color:var(--green);
+  flex-shrink:0;
+  margin-top:0.05rem;
+}
+
+/* ── STACK SECTION ─────────────────────────── */
+.stack-section{background:var(--bg2);}
+.stack-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.stack-group{background:var(--bg);padding:1.5rem;}
+.stack-group-title{
+  font-size:0.65rem;
+  color:var(--green);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  margin-bottom:1rem;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border);
+}
+.stack-items{display:flex;flex-direction:column;gap:0.5rem;}
+.stack-item{
+  font-size:0.75rem;
+  color:var(--muted2);
+  display:flex;align-items:center;gap:0.5rem;
+}
+.stack-item .dot{width:3px;height:3px;background:var(--green);border-radius:50%;flex-shrink:0;}
+.stack-item.learning .dot{background:var(--amber);}
+.stack-item.learning{color:var(--amber);}
+
+/* ── LEARNING ──────────────────────────────── */
+.learning-section{background:var(--bg);}
+.learning-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.learn-card{
+  background:var(--bg2);
+  padding:2rem;
+}
+.learn-num{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:3rem;
+  color:var(--border2);
+  letter-spacing:-0.05em;
+  line-height:1;
+  margin-bottom:0.75rem;
+}
+.learn-title{
+  font-family:var(--sans);
+  font-weight:700;
+  font-size:0.95rem;
+  color:var(--text);
+  margin-bottom:0.5rem;
+  letter-spacing:-0.01em;
+}
+.learn-desc{
+  font-size:0.75rem;
+  color:var(--muted2);
+  line-height:1.8;
+}
+.progress-bar{
+  margin-top:1.25rem;
+  height:2px;
+  background:var(--border2);
+  position:relative;
+}
+.progress-fill{
+  position:absolute;top:0;left:0;height:100%;
+  background:var(--green);
+  transition:width 1s ease;
+}
+
+/* ── CONTACT ───────────────────────────────── */
+.contact-section{background:var(--bg);}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1px 1fr;
+  gap:0 3rem;
+}
+.contact-left{}
+.contact-tagline{
+  font-family:var(--sans);
+  font-weight:800;
+  font-size:clamp(2rem,4vw,3.5rem);
+  letter-spacing:-0.04em;
+  color:var(--text);
+  line-height:1;
+  margin-bottom:1.5rem;
+}
+.contact-tagline .green{color:var(--green);}
+.contact-body{
+  font-size:0.8rem;
+  color:var(--muted2);
+  line-height:1.9;
+  margin-bottom:2rem;
+  max-width:400px;
+}
+.open-to{
+  font-size:0.7rem;
+  color:var(--muted);
+  letter-spacing:0.05em;
+  margin-bottom:0.5rem;
+  text-transform:uppercase;
+}
+.open-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:2rem;}
+.open-tag{
+  font-size:0.68rem;
+  padding:0.3rem 0.7rem;
+  border:1px solid var(--border2);
+  color:var(--muted2);
+  letter-spacing:0.04em;
+}
+.contact-vline{background:var(--border);}
+.contact-right{padding-left:0;}
+.contact-links{display:flex;flex-direction:column;gap:0;}
+.clink{
+  display:flex;flex-direction:column;
+  padding:1.25rem 0;
+  border-bottom:1px solid var(--border);
+  text-decoration:none;
+  transition:padding-left 0.2s;
+}
+.clink:first-child{border-top:1px solid var(--border);}
+.clink:hover{padding-left:0.5rem;}
+.clink-label{
+  font-size:0.6rem;
+  color:var(--muted);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  margin-bottom:0.25rem;
+}
+.clink-val{
+  font-size:0.85rem;
+  color:var(--text);
+}
+.clink:hover .clink-val{color:var(--green);}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:1.5rem 2.5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.68rem;
+  color:var(--muted);
+}
+.footer-dot{
+  width:6px;height:6px;
+  background:var(--green);
+  border-radius:50%;
+  display:inline-block;
+  margin-right:0.4rem;
+  animation:blink 2s infinite;
+}
+
+/* ── REVEAL ANIMATION ───────────────────────── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media(max-width:900px){
+  .hero-main{grid-template-columns:1fr;grid-template-rows:1fr;}
+  .vline{display:none;}
+  .hero-left,.hero-right{padding:3rem 1.5rem;}
+  .ai-grid,.learning-grid{grid-template-columns:1fr;}
+  .proj-grid{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;grid-template-rows:auto auto;gap:1rem;}
+  .exp-vline{display:none;}
+  .contact-grid{grid-template-columns:1fr;}
+  .contact-vline{display:none;}
+  section{padding:3rem 1.5rem;}
+  nav{padding:0.875rem 1.5rem;}
+  .nav-links{display:none;}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Ahmed Raza</h1>
-    <p>Data Engineering | Business Analysis | Financial Data Analytics</p>
-  </header>
-  <div class="container">
-    <div class="section">
-      <h2>About Me</h2>
-      <p align="left"> I'm Ahmed, a data analyst with expertise in business process engineering, project management, and financial management. I use data to build narratives and drive informed business decisions with:</p>
-      <ul>
-        <li><strong>Data Analysis Tools:</strong> Machine Learning, Python, SQL, R, Advanced Excel (Solver, VBA, Power Query Editor)</li>
-        <li><strong>Data Visualization Tools:</strong> Tableau, Power BI, Alteryx, Amazon Quicksight</li>
-        <li><strong>Databases:</strong> MS Access, AWS Cloud, SQL, Mongo DB</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>Current Goals</h2>
-      <ul>
-        <li>👑 Make my mother feel like a Queen</li>
-        <li>📈 Enhance Machine Learning Skills</li>
-        <li>🔍 Solve challenging problems</li>
-        <li>🍳 Retire as a Chef</li>
-      </ul>
-    </div>
-    <div class="section">
-      <h2>Technologies I Use</h2>
-      <div class="skills">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-line-wordmark.svg" height="40" alt="amazon web services logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" height="40" alt="azure logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" height="40" alt="anaconda logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" height="40" alt="canva logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" height="40" alt="google cloud logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" height="40" alt="jupyter logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kaggle/kaggle-original.svg" height="40" alt="Kaggle logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="40" alt="MySQL logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo"  />
-        <img width="12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rstudio/rstudio-original.svg" height="40" alt="Rstudio logo"  />
-        <img width="12" />
-        <img src="https://img.icons8.com/color/48/000000/power-bi.png" height="40" alt="Power BI logo" />
-        <img width="12" />
-      </div>
-        <div class="section">
-      <h2>Courses & Certifications</h2>
-      <ul>
-    <li><strong>Machine Learning for Trading and Finance</strong> – New York Institute of Finance<br>Skills Learned: Machine Learning, Algorithmic Trading</li>
-    <li><strong>Applying Data Analytics in Finance</strong> – University of Illinois Urbana-Champaign<br>Skills Learned: Financial Data Analytics, Algorithmic Trading</li>
-    <li><strong>SQL for Data Science</strong> – University of California, Davis<br>Skills Learned: Data Science, Data Analysis</li>
-    <li><strong>SQL: A Practical Guide for Querying Databases</strong> – IBM<br>Skills Learned: SQL, Relational Database Management System</li>
-    <li><strong>Exploratory Data Analysis in R</strong> – DataCamp<br>Skills Learned: Categorical Data Analysis, R (Programming Language)</li>
-    <li><strong>Data Visualization and Communication with Tableau</strong> – Duke University<br>Skills Learned: Tableau, Data Visualization</li>
+
+<!-- ── NAV ─────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">Ahmed Raza</a>
+  <ul class="nav-links">
+    <li><a href="#ai">AI & LLM</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-    </div>
-    <div class="section">
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>Predictive_Analytics_Income_Data:</strong> Demonstrates predictive analytics techniques on a household dataset to predict income levels.</li>
-        <li><strong>WHO-Life-Expectancy:</strong> Analyzes male and female life expectancy data across regions over the past few decades.</li>
-        <li><strong>NYC_Restaurant_Analysis:</strong> Provides recommendations for increasing restaurant orders using data-driven insights.</li>
-        <li><strong>Decoding-Income-Disparities:</strong> Explores income inequality in the U.S. by analyzing demographic attributes like gender, race, and age.</li>
-        <li><strong>Diversity-Tech-Companies:</strong> Investigates demographic diversity in top Silicon Valley tech companies using visual analytics.</li>
-        <li><strong>Travel_Review_Analysis:</strong> Examines TripAdvisor ratings across 10 categories to assess travel destination appeal.</li>
-      </ul>
-    </div>      
-    <div class="section">
-      <h2>Education</h2>
-      <ul>
-        <li><strong>Hult International Business School </strong><br>MS in Business Analytics, 2025</li>
-        <li><strong>Institute of Business Administration </strong><br>Master of Business Administration with concentration in Finance, 2017</li>
-        </ul>
-     </div>
-    <div class="section">
-      <h2>Experience</h2>
-      <ul>
-        <li><strong>Operations Analyst – Fuze</strong><br>                                                                                    Jan 2023 – Nov 2024  
-          <ul>
-            <li>Ensured accurate trade capture, data reconciliation, and settlement by managing day-to-day operational support systems.</li>
-            <li>Built and maintained a weekly sales dashboard to monitor onboarding funnel metrics and identify performance trends.</li>
-            <li>Oversaw sales operations and streamlined client onboarding workflows, including account setup on trading platforms.</li>
-            <li>Collaborated with the founder to develop scalable systems and data-informed policies for People Advisory Services at the venture studio.</li>
-          </ul>
-        </li><br>
-        <li><strong>Principal Recruiter – Checkout.com</strong><br>                                                                       Apr 2021 – Oct 2022
-          <ul>
-            <li>Managed end-to-end onboarding for commercial, tech, and engineering roles across MENA & APAC regions.</li>
-            <li>Spearheaded research and reporting efforts to inform recruitment strategy with data-driven market intelligence.</li>
-            <li>Designed and maintained dashboards to track hiring trends, benchmark competitors, and analyze talent dynamics.</li>
-          </ul>
-        </li><br>
-        <li><strong>Senior Technical Recruiter – Careem</strong><br>                                                                      Nov 2016 – Apr 2021
-          <ul>
-            <li>Partnered with technical leaders and engineering managers to scale commercial, engineering, and product teams across Dubai, Berlin, and Karachi.</li>
-            <li>Analyzed recruitment and pipeline data to identify key talent metrics and built dynamic dashboards for actionable insights.</li>
-            <li>Collaborated with cross-functional teams to develop and implement data-driven strategies that enhanced pipeline efficiency and reduced time-to-hire.</li>
-          </ul>
-        </div>      
-    <div class="section">
-      <h2>Connect with Me</h2>
-      <p>
-        📍 Boston, Massachussets<br>
-        📧 <a href="mailto:araza.09029@gmail.com">Email Me</a><br>
-        💼 <a href="https://www.linkedin.com/in/ahmed-razaaaa" target="_blank">LinkedIn</a><br>
-        💻 <a href="https://github.com/ahmeraza" target="_blank">GitHub Profile</a>
-      </p>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-ticker ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">AAPL <span class="up">▲ 2.3%</span></span>
+      <span class="ticker-item">NVDA <span class="up">▲ 4.1%</span></span>
+      <span class="ticker-item">MSFT <span class="up">▲ 1.8%</span></span>
+      <span class="ticker-item">TSLA <span class="dn">▼ 0.9%</span></span>
+      <span class="ticker-item">META <span class="up">▲ 3.2%</span></span>
+      <span class="ticker-item">NFLX <span class="up">▲ 1.1%</span></span>
+      <span class="ticker-item">BTC <span class="up">▲ 2.8%</span></span>
+      <span class="ticker-item">ETH <span class="dn">▼ 1.4%</span></span>
+      <span class="ticker-item">VISA <span class="up">▲ 0.7%</span></span>
+      <span class="ticker-item">MA <span class="up">▲ 0.5%</span></span>
+      <span class="ticker-item">LLM: GPT-4o · Claude · Gemini</span>
+      <span class="ticker-item">TOOLS: PySpark · scikit-learn · PyPortfolioOpt</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">AAPL <span class="up">▲ 2.3%</span></span>
+      <span class="ticker-item">NVDA <span class="up">▲ 4.1%</span></span>
+      <span class="ticker-item">MSFT <span class="up">▲ 1.8%</span></span>
+      <span class="ticker-item">TSLA <span class="dn">▼ 0.9%</span></span>
+      <span class="ticker-item">META <span class="up">▲ 3.2%</span></span>
+      <span class="ticker-item">NFLX <span class="up">▲ 1.1%</span></span>
+      <span class="ticker-item">BTC <span class="up">▲ 2.8%</span></span>
+      <span class="ticker-item">ETH <span class="dn">▼ 1.4%</span></span>
+      <span class="ticker-item">VISA <span class="up">▲ 0.7%</span></span>
+      <span class="ticker-item">MA <span class="up">▲ 0.5%</span></span>
+      <span class="ticker-item">LLM: GPT-4o · Claude · Gemini</span>
+      <span class="ticker-item">TOOLS: PySpark · scikit-learn · PyPortfolioOpt</span>
     </div>
   </div>
+
+  <div class="hero-main">
+    <div class="hero-left">
+      <p class="terminal-prompt">Data Analytics & AI Practitioner</p>
+      <h1 class="hero-title">Ahmed<br/><span class="accent">Raza</span></h1>
+      <p class="hero-sub">Fintech · Trading · LLM · Agentic AI</p>
+      <p class="hero-desc">
+        Building at the intersection of financial data, machine learning, and generative AI.
+        10+ years across Fintech, Payments, and Trading analytics —
+        now applying LLMs, agentic workflows, and advanced ML to real business problems.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="https://github.com/ahmeraza" target="_blank" class="btn btn-ghost">GitHub</a>
+        <a href="https://www.linkedin.com/in/ahmed-razaaa/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="vline"></div>
+
+    <div class="hero-right">
+      <div class="stat-row reveal">
+        <div class="stat">
+          <div class="stat-val">10<span class="unit">+</span></div>
+          <div class="stat-lbl">Years in Fintech & Payments</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">26<span class="unit">%</span></div>
+          <div class="stat-lbl">Time-to-hire reduction</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">2<span class="unit">×</span></div>
+          <div class="stat-lbl">Headcount scaled</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">6</div>
+          <div class="stat-lbl">Public repos on GitHub</div>
+        </div>
+      </div>
+      <div class="domain-tags reveal">
+        <span class="dtag hot">LLM & GenAI</span>
+        <span class="dtag hot">Agentic AI</span>
+        <span class="dtag warm">Fintech</span>
+        <span class="dtag warm">Payments</span>
+        <span class="dtag warm">Trading</span>
+        <span class="dtag warm">Crypto</span>
+        <span class="dtag">Python</span>
+        <span class="dtag">SQL</span>
+        <span class="dtag">Power BI</span>
+        <span class="dtag">PySpark</span>
+        <span class="dtag">scikit-learn</span>
+        <span class="dtag">People Analytics</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── AI & LLM SECTION ──────────────────────── -->
+<section class="ai-section" id="ai">
+  <div class="sec-label">AI & Generative Intelligence</div>
+  <h2 class="sec-title reveal">LLM · GenAI · Agentic AI</h2>
+  <div class="ai-grid reveal">
+
+    <div class="ai-card">
+      <div class="ai-card-icon">🤖</div>
+      <div class="ai-card-title">Large Language Models</div>
+      <p class="ai-card-desc">Working with LLM APIs — OpenAI, Claude, Gemini — for applied analytics and automation. Learning prompt engineering, RAG pipeline design, and context window management for real use cases.</p>
+      <span class="ai-card-tag">ACTIVE LEARNING</span>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-icon">⚡</div>
+      <div class="ai-card-title">Agentic AI Workflows</div>
+      <p class="ai-card-desc">Built and deployed AI agents using NLP and LLMs in Microsoft Copilot Studio at FlexTrade — designing automated feedback loops and multi-step agentic pipelines for customer operations.</p>
+      <span class="ai-card-tag">PRODUCTION EXPERIENCE</span>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-icon">🔍</div>
+      <div class="ai-card-title">NLP & Text Analytics</div>
+      <p class="ai-card-desc">Designed NLP-driven workflows for HR operations — job description parsing, candidate signal extraction, and sentiment analysis on employee feedback at scale across MENA operations.</p>
+      <span class="ai-card-tag">APPLIED EXPERIENCE</span>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-icon">📊</div>
+      <div class="ai-card-title">Generative AI for Analytics</div>
+      <p class="ai-card-desc">Applying GenAI to accelerate data analysis workflows — automated report generation, intelligent data summarisation, and AI-assisted insight extraction from financial and HR datasets.</p>
+      <span class="ai-card-tag">BUILDING NOW</span>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-icon">🏗️</div>
+      <div class="ai-card-title">ETL & AI Pipelines</div>
+      <p class="ai-card-desc">Designed data structures and AI-powered ETL pipelines for clinical trial data at 3RT Labs — ensuring data integrity and high-precision reporting for regulatory compliance.</p>
+      <span class="ai-card-tag">PRODUCTION EXPERIENCE</span>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-icon">🎯</div>
+      <div class="ai-card-title">AI Strategy & Adoption</div>
+      <p class="ai-card-desc">Audited enterprise AI usage and evaluated business use cases at FlexTrade — assessing adoption opportunities and delivering integration recommendations to leadership.</p>
+      <span class="ai-card-tag">STRATEGY EXPERIENCE</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PROJECTS ──────────────────────────────── -->
+<section class="projects-section" id="projects">
+  <div class="sec-label">Featured Work</div>
+  <h2 class="sec-title reveal">Financial & Data Projects</h2>
+  <div class="proj-grid reveal">
+
+    <a class="proj-card featured" href="https://github.com/ahmeraza/Algorithmic-Trading-in-Python" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">📈</span>
+        <span class="proj-badge">FEATURED</span>
+      </div>
+      <div class="proj-name">Algorithmic Trading — RSI + Momentum</div>
+      <p class="proj-desc">Quantitative trading strategy backtested across AAPL, NVDA, MSFT, TSLA, NFLX, META (2012–2023). RSI + 6-month momentum signals, Efficient Frontier optimisation, Max Sharpe, HRP, and 36-combination parameter sensitivity heatmap. Full train/test split methodology.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>bt</span><span>PyPortfolioOpt</span><span>seaborn</span><span>pandas</span><span>yfinance</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/ahmeraza/Customer_Segmentation_Visa_Mastercard" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">💳</span>
+        <span class="proj-badge">FINTECH</span>
+      </div>
+      <div class="proj-name">Customer Segmentation — Visa & Mastercard</div>
+      <p class="proj-desc">Unsupervised ML to identify customer clusters in payments data using K-Means clustering on behavioural and demographic features. Built with direct fintech domain knowledge from Checkout.com and Fuze — applied to real payments user profiles.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>K-Means</span><span>pandas</span><span>seaborn</span><span>EDA</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/ahmeraza/People-Analytics-Employee-Attrition-Performance" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">👥</span>
+        <span class="proj-badge">ML</span>
+      </div>
+      <div class="proj-name">People Analytics — Attrition & Performance</div>
+      <p class="proj-desc">Predictive ML models for employee attrition and performance. Built from 10+ years of direct HR experience — modelling a problem I've seen generate millions in unnecessary turnover costs across fintech companies.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>scikit-learn</span><span>pandas</span><span>ML models</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/ahmeraza/Decoding-Income-Disparities" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">📊</span>
+        <span class="proj-badge">EDA</span>
+      </div>
+      <div class="proj-name">Decoding Income Disparities</div>
+      <p class="proj-desc">Exploratory data analysis on the US Adult Income dataset — investigating inequalities tied to gender, race, age, and education using statistical visualisation and demographic segmentation.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>pandas</span><span>matplotlib</span><span>EDA</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/ahmeraza/NYC_Restaurant_Analysis" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">🏙️</span>
+        <span class="proj-badge">BUSINESS INTEL</span>
+      </div>
+      <div class="proj-name">NYC Restaurant Analytics</div>
+      <p class="proj-desc">Business intelligence analysis of restaurant performance data. Moves beyond visualisation to deliver specific, actionable recommendations for increasing order volume — the kind of output that gets actioned by a business.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>pandas</span><span>matplotlib</span><span>BI</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="proj-card" href="https://github.com/ahmeraza/Diversity-Tech-Companies" target="_blank">
+      <div class="proj-head">
+        <span class="proj-icon">🔬</span>
+        <span class="proj-badge">D&I</span>
+      </div>
+      <div class="proj-name">Diversity in Silicon Valley Tech</div>
+      <p class="proj-desc">Demographic analysis of diversity across leading tech companies. Informed by leading Careem's Global D&I initiative — analysis grounded in firsthand experience building diverse engineering and commercial teams.</p>
+      <div class="proj-stack">
+        <span>Python</span><span>pandas</span><span>seaborn</span><span>D&I analytics</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── CURRENTLY LEARNING ─────────────────────── -->
+<section class="learning-section">
+  <div class="sec-label">Currently Building</div>
+  <h2 class="sec-title reveal">Active Learning</h2>
+  <div class="learning-grid reveal">
+    <div class="learn-card">
+      <div class="learn-num">01</div>
+      <div class="learn-title">LLM & Applied AI</div>
+      <p class="learn-desc">Learning LLMs end-to-end — API integration, prompt engineering, RAG pipelines, fine-tuning, and building applied projects that demonstrate real analytical use cases beyond demos.</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-num">02</div>
+      <div class="learn-title">Advanced Analytics — PySpark</div>
+      <p class="learn-desc">Scaling from single-machine pandas to distributed data processing. Learning PySpark, Spark SQL, and large-scale analytics pipelines for fintech datasets that don't fit in memory.</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:35%"></div></div>
+    </div>
+    <div class="learn-card">
+      <div class="learn-num">03</div>
+      <div class="learn-title">Machine Learning Depth</div>
+      <p class="learn-desc">Building expertise beyond model-calling — feature engineering, hyperparameter tuning, model evaluation frameworks, MLOps, and productionisation for financial analytics models.</p>
+      <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ────────────────────────────── -->
+<section class="exp-section" id="experience">
+  <div class="sec-label">Work History</div>
+  <h2 class="sec-title reveal">Experience</h2>
+  <div class="exp-list reveal">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-co">FlexTrade</div>
+        <div class="exp-period">Jun – Aug 2025</div>
+        <div class="exp-period">New York, NY</div>
+        <span class="exp-domain">FINTECH / AI</span>
+      </div>
+      <div class="exp-vline"></div>
+      <div class="exp-body">
+        <div class="exp-role">Data Analyst, Strategy & Sales Operations</div>
+        <ul class="exp-points">
+          <li>Built and deployed AI agents using NLP and LLMs in Microsoft Copilot Studio — automated customer support workflows with feedback loops</li>
+          <li>Integrated multi-source datasets to develop Power BI dashboards delivering actionable financial trends and performance metrics for budget owners</li>
+          <li>Audited enterprise AI usage and evaluated business use cases — recommended day-to-day AI integration strategies to leadership</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-co">3RT Labs</div>
+        <div class="exp-period">Oct – Dec 2025</div>
+        <div class="exp-period">Dubai, UAE</div>
+        <span class="exp-domain">AI AUTOMATION</span>
+      </div>
+      <div class="exp-vline"></div>
+      <div class="exp-body">
+        <div class="exp-role">Data Analyst, Growth & AI Automation</div>
+        <ul class="exp-points">
+          <li>Designed ETL pipelines and AI-powered workflows aligned with sales, product-market fit, and GTM strategy</li>
+          <li>Built data structures for clinical trial pilot — high-precision reporting for regulatory compliance</li>
+          <li>Led UAT to uncover revenue opportunities from business process analysis and market research</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-co">Fuze</div>
+        <div class="exp-period">Nov 2023 – Jun 2024</div>
+        <div class="exp-period">Dubai, UAE</div>
+        <span class="exp-domain">PAYMENTS / FINTECH</span>
+      </div>
+      <div class="exp-vline"></div>
+      <div class="exp-body">
+        <div class="exp-role">Sales Operations Analyst</div>
+        <ul class="exp-points">
+          <li>Digitised KYC operations — reduced compliance approval time from 72h → 24h using Sumsub</li>
+          <li>Automated Salesforce dashboards for real-time onboarding funnel visibility and forecasting</li>
+          <li>Tracked VARA and Central Bank UAE regulatory license submissions with legal and compliance teams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-co">Checkout.com</div>
+        <div class="exp-period">Apr 2021 – Sep 2022</div>
+        <div class="exp-period">Dubai, UAE</div>
+        <span class="exp-domain">PAYMENTS INFRASTRUCTURE</span>
+      </div>
+      <div class="exp-vline"></div>
+      <div class="exp-body">
+        <div class="exp-role">Principal Recruiter & Senior People Specialist</div>
+        <ul class="exp-points">
+          <li>Joined as first in-house recruiter at one of MENA's leading payment infrastructure companies</li>
+          <li>Scaled regional headcount 2× across UAE and KSA — Engineering, Commercial, and Support</li>
+          <li>Deep operational exposure to payments infrastructure, fintech growth cycles, and product-market dynamics</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-co">Careem</div>
+        <div class="exp-period">Nov 2016 – Apr 2021</div>
+        <div class="exp-period">Dubai / Karachi</div>
+        <span class="exp-domain">TECH / RIDE-HAILING</span>
+      </div>
+      <div class="exp-vline"></div>
+      <div class="exp-body">
+        <div class="exp-role">Sr. Technical Recruiter & TA Manager — D&I and Employer Branding</div>
+        <ul class="exp-points">
+          <li>Delivered 280+ roles across UAE, KSA, Qatar, Pakistan — cut time-to-hire by 26%, achieved 130% KPIs</li>
+          <li>Led Global D&I initiative — gender balance, awareness training, success milestones across business functions</li>
+          <li>Scaled Engineering, ML, Data Science, and Product teams in Dubai, Berlin, and Pakistan</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── STACK ──────────────────────────────────── -->
+<section class="stack-section" id="stack">
+  <div class="sec-label">Technical Capabilities</div>
+  <h2 class="sec-title reveal">Stack</h2>
+  <div class="stack-grid reveal">
+    <div class="stack-group">
+      <div class="stack-group-title">Languages</div>
+      <div class="stack-items">
+        <span class="stack-item"><span class="dot"></span>Python</span>
+        <span class="stack-item"><span class="dot"></span>SQL</span>
+        <span class="stack-item"><span class="dot"></span>R</span>
+        <span class="stack-item"><span class="dot"></span>Excel VBA / Power Query</span>
+        <span class="stack-item learning"><span class="dot"></span>PySpark ↑ learning</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">AI & LLM</div>
+      <div class="stack-items">
+        <span class="stack-item learning"><span class="dot"></span>LLM APIs (GPT, Claude) ↑</span>
+        <span class="stack-item learning"><span class="dot"></span>RAG pipelines ↑</span>
+        <span class="stack-item"><span class="dot"></span>Microsoft Copilot Studio</span>
+        <span class="stack-item"><span class="dot"></span>NLP workflows</span>
+        <span class="stack-item"><span class="dot"></span>AI agent design</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Machine Learning</div>
+      <div class="stack-items">
+        <span class="stack-item"><span class="dot"></span>scikit-learn</span>
+        <span class="stack-item"><span class="dot"></span>pandas · NumPy</span>
+        <span class="stack-item"><span class="dot"></span>Classification / Clustering</span>
+        <span class="stack-item learning"><span class="dot"></span>MLOps fundamentals ↑</span>
+        <span class="stack-item"><span class="dot"></span>Feature engineering</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Financial Analytics</div>
+      <div class="stack-items">
+        <span class="stack-item"><span class="dot"></span>bt (backtesting)</span>
+        <span class="stack-item"><span class="dot"></span>PyPortfolioOpt</span>
+        <span class="stack-item"><span class="dot"></span>yfinance / market data</span>
+        <span class="stack-item"><span class="dot"></span>Technical indicators</span>
+        <span class="stack-item"><span class="dot"></span>Portfolio optimisation</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">BI & Visualisation</div>
+      <div class="stack-items">
+        <span class="stack-item"><span class="dot"></span>Power BI</span>
+        <span class="stack-item"><span class="dot"></span>Tableau</span>
+        <span class="stack-item"><span class="dot"></span>Alteryx</span>
+        <span class="stack-item"><span class="dot"></span>Amazon QuickSight</span>
+        <span class="stack-item"><span class="dot"></span>matplotlib · seaborn · Plotly</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="stack-group-title">Cloud & Data Infra</div>
+      <div class="stack-items">
+        <span class="stack-item"><span class="dot"></span>AWS</span>
+        <span class="stack-item"><span class="dot"></span>Azure</span>
+        <span class="stack-item"><span class="dot"></span>Google Cloud</span>
+        <span class="stack-item"><span class="dot"></span>MongoDB</span>
+        <span class="stack-item"><span class="dot"></span>Salesforce (dashboards)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────────── -->
+<section class="contact-section" id="contact">
+  <div class="sec-label">Get in Touch</div>
+  <div class="contact-grid reveal">
+    <div class="contact-left">
+      <h2 class="contact-tagline">Let's work<br/>on <span class="green">data</span><br/>problems.</h2>
+      <p class="contact-body">
+        Open to roles in Data Analytics, AI/ML Engineering, and Fintech Analytics.
+        I bring a rare combination of deep domain expertise in financial services and payments
+        with hands-on AI and analytics skills — both sides built in production.
+      </p>
+      <p class="open-to">Open to</p>
+      <div class="open-tags">
+        <span class="open-tag">Data Analytics</span>
+        <span class="open-tag">AI / ML Engineering</span>
+        <span class="open-tag">Fintech Analytics</span>
+        <span class="open-tag">Trading & Quant</span>
+        <span class="open-tag">People Analytics</span>
+      </div>
+      <a href="mailto:emrazaahmed@gmail.com" class="btn btn-primary">Send a message →</a>
+    </div>
+    <div class="contact-vline"></div>
+    <div class="contact-right">
+      <div class="contact-links">
+        <a href="mailto:emrazaahmed@gmail.com" class="clink">
+          <span class="clink-label">Email</span>
+          <span class="clink-val">emrazaahmed@gmail.com</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ahmed-razaaa/" target="_blank" class="clink">
+          <span class="clink-label">LinkedIn</span>
+          <span class="clink-val">linkedin.com/in/ahmed-razaaa</span>
+        </a>
+        <a href="https://github.com/ahmeraza" target="_blank" class="clink">
+          <span class="clink-label">GitHub</span>
+          <span class="clink-val">github.com/ahmeraza</span>
+        </a>
+        <a class="clink" style="cursor:default;">
+          <span class="clink-label">Location</span>
+          <span class="clink-val">Dubai, United Arab Emirates</span>
+        </a>
+        <a class="clink" style="cursor:default;border-bottom:none;">
+          <span class="clink-label">Education</span>
+          <span class="clink-val">MS Business Analytics & AI — Hult International Business School</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span><span class="footer-dot"></span>Ahmed Raza — Data Analytics & AI</span>
+  <span>Dubai, UAE · ahmeraza.github.io</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
